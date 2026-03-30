@@ -1,7 +1,62 @@
-import { streamChat } from "../api.js";
+import { getFiles, streamChat } from "../api.js";
 import { showLoader, hideLoader } from "../loader.js";
 
 let _toast;
+let _taggedSources = new Set();  // filenames currently tagged
+
+// ── Tag picker ───────────────────────────────────────────────────
+
+async function refreshTagPicker() {
+  const row = document.getElementById("chat-tag-row");
+  const hint = document.getElementById("chat-scope-hint");
+  if (!row) return;
+
+  let files = [];
+  try { files = await getFiles(); } catch (_) { /* ignore */ }
+
+  if (!files.length) {
+    row.innerHTML = `<span class="chat-tag-label">No files uploaded</span>`;
+    if (hint) hint.textContent = "";
+    return;
+  }
+
+  row.innerHTML = `<span class="chat-tag-label">Scope:</span>` +
+    files.map(f => {
+      const active = _taggedSources.has(f.name) ? " active" : "";
+      return `<button class="file-tag${active}" data-name="${f.name}" title="${f.name}">
+        <span class="tag-dot"></span>${f.name}
+      </button>`;
+    }).join("");
+
+  row.querySelectorAll(".file-tag").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.name;
+      if (_taggedSources.has(name)) {
+        _taggedSources.delete(name);
+        btn.classList.remove("active");
+      } else {
+        _taggedSources.add(name);
+        btn.classList.add("active");
+      }
+      updateHint();
+    });
+  });
+
+  updateHint();
+}
+
+function updateHint() {
+  const hint = document.getElementById("chat-scope-hint");
+  if (!hint) return;
+  if (_taggedSources.size === 0) {
+    hint.textContent = "Searching all uploaded contracts.";
+  } else {
+    const names = [..._taggedSources].join(", ");
+    hint.textContent = `Scoped to: ${names}`;
+  }
+}
+
+// ── Messages ─────────────────────────────────────────────────────
 
 function scrollToBottom() {
   const el = document.getElementById("chat-messages");
@@ -29,10 +84,17 @@ function updateMessage(id, content, streaming = false) {
   scrollToBottom();
 }
 
+// ── Init ─────────────────────────────────────────────────────────
+
 export function initChat(toast) {
   _toast = toast;
   const input   = document.getElementById("chat-input");
   const sendBtn = document.getElementById("chat-send");
+
+  refreshTagPicker();
+
+  // Refresh tag picker when switching to chat tab (new files may have been uploaded)
+  document.querySelector('[data-tab="chat"]').addEventListener("click", refreshTagPicker);
 
   function sendMessage() {
     const question = input.value.trim();
@@ -49,8 +111,11 @@ export function initChat(toast) {
     let fullAnswer = "";
     let loaderHidden = false;
 
+    const sources = _taggedSources.size > 0 ? [..._taggedSources] : [];
+
     streamChat(
       question,
+      sources,
       (chunk) => {
         if (!loaderHidden) { hideLoader(); loaderHidden = true; }
         fullAnswer += chunk;

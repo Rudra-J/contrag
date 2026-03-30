@@ -366,3 +366,68 @@ mark.term-hl { background: rgba(200,168,80,0.25); border-radius: 2px; color: var
   font-size: 0.9rem;
 }
 .empty-state p { margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-dim); }
+
+/* ── Chat file tag picker ───────────────────────────────────────── */
+.chat-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 16px 0;
+  min-height: 36px;
+  align-items: center;
+}
+
+.chat-tag-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-right: 4px;
+  white-space: nowrap;
+  line-height: 26px;
+}
+
+.file-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 8px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  user-select: none;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-tag:hover {
+  border-color: var(--gold);
+  color: var(--text);
+}
+
+.file-tag.active {
+  border-color: var(--gold);
+  background: rgba(200, 168, 80, 0.12);
+  color: var(--gold);
+}
+
+.file-tag .tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.chat-scope-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+  padding: 2px 16px 4px;
+  font-style: italic;
+}

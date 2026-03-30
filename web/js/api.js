@@ -36,12 +36,17 @@ export async function getGlossary(q = "") {
 /**
  * Streams chat via SSE. Calls onChunk(text) for each token.
  * Calls onDone() when stream ends. Calls onError(msg) on failure.
+ * @param {string} question
+ * @param {string[]} sources  - filenames to filter by; [] means all
+ * @param {Function} onChunk
+ * @param {Function} onDone
+ * @param {Function} onError
  */
-export function streamChat(question, onChunk, onDone, onError) {
+export function streamChat(question, sources, onChunk, onDone, onError) {
   fetch(`${BASE}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question }),
+    body: JSON.stringify({ question, sources }),
   }).then(async (r) => {
     if (!r.ok) { onError(await r.text()); return; }
     const reader = r.body.getReader();
