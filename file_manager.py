@@ -11,6 +11,7 @@ def _load_meta():
         return json.load(f)
 
 def _save_meta(meta):
+    os.makedirs(os.path.dirname(META_PATH), exist_ok=True)
     with open(META_PATH, "w") as f:
         json.dump(meta, f, indent=2)
 
