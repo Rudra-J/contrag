@@ -9,3 +9,6 @@ langchain-text-splitters
 sentence-transformers
 streamlit
 pytest
+fastapi
+uvicorn[standard]
+python-multipart
