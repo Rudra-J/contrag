@@ -4,5 +4,8 @@ faiss-cpu
 langchain
 langchain-community
 langchain-ollama
+langchain-core
+langchain-text-splitters
 sentence-transformers
 streamlit
+pytest
