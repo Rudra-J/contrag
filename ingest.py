@@ -3,6 +3,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
 import os
+import glossary_engine
 
 CLAUSE_MARKERS = [
     "\n1.", "\n2.", "\n3.", "\nWHEREAS", "\nIN WITNESS",
@@ -22,7 +23,7 @@ def ingest(file_path: str, store_path: str = "faiss_index"):
     splitter = RecursiveCharacterTextSplitter(
         separators=CLAUSE_MARKERS + ["\n\n", "\n", ". ", " "],
         chunk_size=800,
-        chunk_overlap=100,                                          
+        chunk_overlap=100,
     )
     chunks = splitter.create_documents(
         [full_text],
@@ -38,3 +39,8 @@ def ingest(file_path: str, store_path: str = "faiss_index"):
 
     db.save_local(store_path)
     print(f"Ingested {len(chunks)} chunks from {os.path.basename(file_path)}")
+
+    # Auto-update glossary from newly ingested chunks
+    chunk_texts = [c.page_content for c in chunks]
+    file_name = os.path.basename(file_path)
+    glossary_engine.extract_and_update(file_path, file_name, chunk_texts)
