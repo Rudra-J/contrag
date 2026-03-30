@@ -41,7 +41,7 @@ function buildSelectors(files) {
     <div class="card">
       <div class="diff-selectors">
         ${buildSlot("diff-a", "Base contract", names, 0)}
-        ${buildSlot("diff-b", "Compare contract", names, Math.min(1, names.length - 1))}
+        ${buildSlot("diff-b", "Compare contract", names, Math.min(1, Math.max(0, names.length - 1)))}
         <button class="btn btn-primary" id="diff-btn"${names.length < 2 ? " disabled" : ""}>Compare</button>
       </div>
     </div>
@@ -134,7 +134,8 @@ function wireUploadInputs(container, onUploadComplete) {
         _toast(`Upload failed: ${e.message || e}`, "error");
       } finally {
         hideLoader();
-        // Reset input so the same file can be re-selected if needed
+        // On error path: reset live input to allow re-selecting the same file.
+        // On success path: render() has replaced the DOM; this is a no-op.
         fileInput.value = "";
       }
     });
