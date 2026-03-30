@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contrag</title>
+  <link rel="stylesheet" href="/web/css/design-system.css">
+  <link rel="stylesheet" href="/web/css/loader.css">
+  <link rel="stylesheet" href="/web/css/app.css">
+</head>
+<body>
+
+<!-- Lady Justice Loader -->
+<div id="justice-loader" aria-label="Loading" role="status">
+  <div class="justice-brand">Contrag</div>
+  <svg class="justice-scales" viewBox="0 0 140 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="66" y="40" width="8" height="96" fill="#b0a080" rx="2"/>
+    <rect x="34" y="132" width="72" height="9" fill="#b0a080" rx="3"/>
+    <circle cx="70" cy="36" r="6" fill="#c8a850"/>
+    <g class="beam-group">
+      <line x1="10" y1="42" x2="130" y2="42" stroke="#c8a850" stroke-width="3.5" stroke-linecap="round"/>
+      <line x1="20" y1="42" x2="20" y2="70" stroke="#c8a850" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <line x1="120" y1="42" x2="120" y2="70" stroke="#c8a850" stroke-width="1.5" stroke-dasharray="4 3"/>
+      <g class="pan-left">
+        <ellipse cx="20" cy="74" rx="19" ry="6" fill="#c8a850" opacity="0.9"/>
+      </g>
+      <g class="pan-right">
+        <ellipse cx="120" cy="74" rx="19" ry="6" fill="#c8a850" opacity="0.9"/>
+      </g>
+    </g>
+  </svg>
+  <div class="justice-label" id="loader-label">Initialising&hellip;</div>
+</div>
+
+<!-- App Shell -->
+<div id="app" style="display:none">
+  <nav id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-brand">
+      <h1>Contrag</h1>
+      <span>Contract Intelligence</span>
+    </div>
+    <button class="nav-item active" data-tab="files">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Files
+    </button>
+    <button class="nav-item" data-tab="chat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Chat
+    </button>
+    <button class="nav-item" data-tab="diff">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Diff
+    </button>
+    <button class="nav-item" data-tab="glossary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Glossary
+    </button>
+  </nav>
+
+  <main id="main">
+    <div id="tab-files" class="tab-panel active" role="tabpanel" aria-label="Files">
+      <h2 class="panel-title">Contract Files</h2>
+      <div id="files-content"></div>
+    </div>
+    <div id="tab-chat" class="tab-panel" role="tabpanel" aria-label="Chat">
+      <h2 class="panel-title">Contract Q&amp;A</h2>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Ask about your contracts…" autocomplete="off">
+        <button class="btn btn-primary" id="chat-send">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send
+        </button>
+      </div>
+    </div>
+    <div id="tab-diff" class="tab-panel" role="tabpanel" aria-label="Diff">
+      <h2 class="panel-title">Contract Diff</h2>
+      <div id="diff-content"></div>
+    </div>
+    <div id="tab-glossary" class="tab-panel" role="tabpanel" aria-label="Glossary">
+      <h2 class="panel-title">Legal Glossary</h2>
+      <div id="glossary-content"></div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container" aria-live="polite"></div>
+<script type="module" src="/web/js/app.js"></script>
+</body>
+</html>

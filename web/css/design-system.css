@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --bg:          #0f1117;
+  --surface:     #1a1a27;
+  --surface-2:   #22223a;
+  --border:      rgba(255,255,255,0.08);
+  --border-gold: rgba(200,168,80,0.3);
+  --gold:        #c8a850;
+  --gold-dim:    rgba(200,168,80,0.12);
+  --gold-glow:   rgba(200,168,80,0.25);
+  --text:        #e8e6df;
+  --text-muted:  #8a8990;
+  --text-dim:    #5a5960;
+  --green:       #4a9e4a;
+  --green-bg:    #1a3a1a;
+  --red:         #9e4a4a;
+  --red-bg:      #3a1a1a;
+  --blue:        #5e6ad2;
+  --radius:      8px;
+  --radius-lg:   14px;
+  --font-head:   'EB Garamond', Georgia, serif;
+  --font-body:   'Lato', system-ui, sans-serif;
+  --transition:  150ms cubic-bezier(0.16,1,0.3,1);
+  --shadow:      0 4px 24px rgba(0,0,0,0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; color-scheme: dark; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4 { font-family: var(--font-head); font-weight: 600; line-height: 1.2; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: var(--transition);
+}
+button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+input, textarea {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+input:focus, textarea:focus { border-color: var(--gold); }
+
+select {
+  font-family: var(--font-body);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+}
+select:focus { border-color: var(--gold); }
+
+* { scrollbar-width: thin; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

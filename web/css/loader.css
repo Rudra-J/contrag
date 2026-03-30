@@ -1,0 +1,62 @@
+/* ── Lady Justice Loader ────────────────────────────────────────────── */
+#justice-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  z-index: 9999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+#justice-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.justice-brand {
+  font-family: var(--font-head);
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+}
+
+.justice-scales {
+  width: 140px;
+  height: 140px;
+}
+
+@keyframes beam-rock {
+  0%   { transform: rotate(-20deg); }
+  50%  { transform: rotate(20deg); }
+  100% { transform: rotate(-20deg); }
+}
+@keyframes pan-drop-left {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(14px); }
+  100% { transform: translateY(0); }
+}
+@keyframes pan-rise-right {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-14px); }
+  100% { transform: translateY(0); }
+}
+
+.beam-group {
+  transform-origin: 70px 42px;
+  animation: beam-rock 1.8s ease-in-out infinite;
+}
+.pan-left  { animation: pan-drop-left  1.8s ease-in-out infinite; }
+.pan-right { animation: pan-rise-right 1.8s ease-in-out infinite; }
+
+.justice-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
