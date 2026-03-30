@@ -1,0 +1,8 @@
+unstructured[pdf]
+python-docx
+faiss-cpu
+langchain
+langchain-community
+langchain-ollama
+sentence-transformers
+streamlit
