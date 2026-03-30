@@ -1,26 +1,65 @@
-import { getFiles, getDiff } from "../api.js";
+import { getFiles, uploadFile, getDiff } from "../api.js";
 import { showLoader, hideLoader } from "../loader.js";
 
 let _toast;
 
+// ── HTML escaping ─────────────────────────────────────────────────
+
+function esc(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+// ── Slot builder ─────────────────────────────────────────────────
+
+function buildSlot(id, labelText, names, defaultIndex) {
+  const opts = names.map((n, i) =>
+    `<option value="${esc(n)}"${i === defaultIndex ? " selected" : ""}>${esc(n)}</option>`
+  ).join("");
+
+  return `
+    <div class="diff-slot">
+      <label for="${id}">${esc(labelText)}</label>
+      <div class="diff-slot-controls">
+        <select id="${id}">${opts}</select>
+        <label class="btn btn-secondary diff-upload-btn" title="Upload a new contract for this slot">
+          Upload new
+          <input class="diff-upload-input" type="file" accept=".pdf,.docx,.txt">
+        </label>
+      </div>
+    </div>
+  `;
+}
+
 function buildSelectors(files) {
   const names = files.map(f => f.name);
-  if (names.length < 2) {
-    return `<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text-dim)" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><p>Upload at least 2 contracts to compare.</p></div>`;
-  }
-  const opts = names.map(n => `<option value="${n}">${n}</option>`).join("");
-  const opts2 = [...names.slice(1), names[0]].map(n => `<option value="${n}">${n}</option>`).join("");
-  return `
+
+  const selectorBlock = `
     <div class="card">
       <div class="diff-selectors">
-        <label>Base contract<select id="diff-a">${opts}</select></label>
-        <label>Compare contract<select id="diff-b">${opts2}</select></label>
-        <button class="btn btn-primary" id="diff-btn">Compare</button>
+        ${buildSlot("diff-a", "Base contract", names, 0)}
+        ${buildSlot("diff-b", "Compare contract", names, Math.min(1, names.length - 1))}
+        <button class="btn btn-primary" id="diff-btn"${names.length < 2 ? " disabled" : ""}>Compare</button>
       </div>
     </div>
     <div id="diff-result"></div>
   `;
+
+  if (names.length === 0) {
+    return `<div class="empty-state">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text-dim)" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <p>Upload contracts using the buttons below, or add them on the Files page first.</p>
+    </div>
+    ${selectorBlock}`;
+  }
+
+  return selectorBlock;
 }
+
+// ── Diff renderer ─────────────────────────────────────────────────
 
 const CTX = 3;
 
@@ -60,13 +99,6 @@ function renderDiff(hunks) {
   `;
 }
 
-function esc(s) {
-  return String(s)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;");
-}
-
 function hunkHtml(h) {
   const prefix = h.type === "added" ? "+" : h.type === "removed" ? "&#8722;" : "&nbsp;";
   const la = h.line_a ?? "";
@@ -79,16 +111,60 @@ function hunkHtml(h) {
   </div>`;
 }
 
+// ── Upload wiring ─────────────────────────────────────────────────
+
+function wireUploadInputs(container, onUploadComplete) {
+  ["diff-a", "diff-b"].forEach(slotId => {
+    const select = container.querySelector(`#${slotId}`);
+    if (!select) return;
+    const slotEl = select.closest(".diff-slot");
+    if (!slotEl) return;
+    const fileInput = slotEl.querySelector(".diff-upload-input");
+    if (!fileInput) return;
+
+    fileInput.addEventListener("change", async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      showLoader(`Ingesting ${file.name}\u2026`);
+      try {
+        await uploadFile(file);
+        _toast(`${file.name} uploaded.`, "success");
+        await onUploadComplete(slotId, file.name);
+      } catch(e) {
+        _toast(`Upload failed: ${e.message || e}`, "error");
+      } finally {
+        hideLoader();
+        // Reset input so the same file can be re-selected if needed
+        fileInput.value = "";
+      }
+    });
+  });
+}
+
+// ── Init ─────────────────────────────────────────────────────────
+
 export async function initDiff(toast) {
   _toast = toast;
   const container = document.getElementById("diff-content");
 
-  async function render() {
+  async function render(selectAfterUpload = null) {
     const files = await getFiles();
     container.innerHTML = buildSelectors(files);
 
+    // If called after an upload, pre-select the new file in the specified slot
+    if (selectAfterUpload) {
+      const select = document.getElementById(selectAfterUpload.slotId);
+      if (select) select.value = selectAfterUpload.filename;
+    }
+
+    // Wire upload inputs
+    wireUploadInputs(container, async (slotId, filename) => {
+      await render({ slotId, filename });
+    });
+
+    // Wire compare button
     const btn = document.getElementById("diff-btn");
-    if (!btn) return;
+    if (!btn || btn.disabled) return;
 
     btn.addEventListener("click", async () => {
       const a = document.getElementById("diff-a").value;
@@ -107,5 +183,5 @@ export async function initDiff(toast) {
   }
 
   await render();
-  document.querySelector('[data-tab="diff"]').addEventListener("click", render);
+  document.querySelector('[data-tab="diff"]').addEventListener("click", () => render());
 }

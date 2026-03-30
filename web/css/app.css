@@ -435,3 +435,42 @@ mark.term-hl { background: rgba(200,168,80,0.25); border-radius: 2px; color: var
   padding: 2px 16px 4px;
   font-style: italic;
 }
+
+/* ── Diff upload slots ──────────────────────────────────────────── */
+.diff-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.diff-slot label:first-child {
+  font-size: 12px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.diff-slot-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.diff-slot-controls select {
+  flex: 1;
+  min-width: 0;
+}
+
+.diff-upload-btn {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.diff-upload-input {
+  display: none;
+}
