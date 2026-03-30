@@ -401,9 +401,6 @@ mark.term-hl { background: rgba(200,168,80,0.25); border-radius: 2px; color: var
   transition: border-color 0.15s, color 0.15s, background 0.15s;
   user-select: none;
   max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .file-tag:hover {
@@ -423,6 +420,13 @@ mark.term-hl { background: rgba(200,168,80,0.25); border-radius: 2px; color: var
   border-radius: 50%;
   background: currentColor;
   flex-shrink: 0;
+}
+
+.file-tag .tag-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 .chat-scope-hint {

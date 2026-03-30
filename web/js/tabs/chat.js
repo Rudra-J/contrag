@@ -1,6 +1,14 @@
 import { getFiles, streamChat } from "../api.js";
 import { showLoader, hideLoader } from "../loader.js";
 
+function esc(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 let _toast;
 let _taggedSources = new Set();  // filenames currently tagged
 
@@ -14,6 +22,12 @@ async function refreshTagPicker() {
   let files = [];
   try { files = await getFiles(); } catch (_) { /* ignore */ }
 
+  // Prune tags for files that no longer exist
+  const validNames = new Set(files.map(f => f.name));
+  for (const s of _taggedSources) {
+    if (!validNames.has(s)) _taggedSources.delete(s);
+  }
+
   if (!files.length) {
     row.innerHTML = `<span class="chat-tag-label">No files uploaded</span>`;
     if (hint) hint.textContent = "";
@@ -23,8 +37,8 @@ async function refreshTagPicker() {
   row.innerHTML = `<span class="chat-tag-label">Scope:</span>` +
     files.map(f => {
       const active = _taggedSources.has(f.name) ? " active" : "";
-      return `<button class="file-tag${active}" data-name="${f.name}" title="${f.name}">
-        <span class="tag-dot"></span>${f.name}
+      return `<button class="file-tag${active}" data-name="${esc(f.name)}" title="${esc(f.name)}" aria-pressed="${_taggedSources.has(f.name)}">
+        <span class="tag-dot"></span><span class="tag-name">${esc(f.name)}</span>
       </button>`;
     }).join("");
 
@@ -34,9 +48,11 @@ async function refreshTagPicker() {
       if (_taggedSources.has(name)) {
         _taggedSources.delete(name);
         btn.classList.remove("active");
+        btn.setAttribute("aria-pressed", "false");
       } else {
         _taggedSources.add(name);
         btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
       }
       updateHint();
     });
