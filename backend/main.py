@@ -99,11 +99,12 @@ async def chat(body: dict):
     question = body.get("question", "")
     if not question.strip():
         raise HTTPException(400, "Question is required")
+    sources = body.get("sources") or None  # [] treated as None → full index
 
     def generate():
         try:
             from chain import ask_stream
-            for chunk in ask_stream(question):
+            for chunk in ask_stream(question, sources=sources):
                 escaped = chunk.replace("\n", "\\n")
                 yield f"data: {escaped}\n\n"
         except FileNotFoundError as e:
