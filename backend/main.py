@@ -100,6 +100,8 @@ async def chat(body: dict):
     if not question.strip():
         raise HTTPException(400, "Question is required")
     sources = body.get("sources") or None  # [] treated as None → full index
+    if sources is not None and not isinstance(sources, list):
+        raise HTTPException(400, "sources must be a list of filenames")
 
     def generate():
         try:

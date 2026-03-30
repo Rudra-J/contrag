@@ -8,13 +8,13 @@ EMBEDDINGS = HuggingFaceEmbeddings(
     encode_kwargs={"normalize_embeddings": True}
 )
 
-def get_retriever(store_path: str = "faiss_index", k: int = 5, sources: list = None):
+def get_retriever(store_path: str = "faiss_index", k: int = 5, sources: list | None = None):
     if not os.path.exists(store_path):
         raise FileNotFoundError("No contracts ingested yet. Upload a contract first.")
     db = FAISS.load_local(store_path, EMBEDDINGS,
                           allow_dangerous_deserialization=True)
     search_kwargs = {"k": k}
-    if sources:
+    if sources is not None:
         source_set = set(sources)
         search_kwargs["filter"] = lambda meta: meta.get("source") in source_set
     return db.as_retriever(search_kwargs=search_kwargs)

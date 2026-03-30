@@ -1,11 +1,10 @@
 # tests/test_chain.py
-import pytest
 from unittest.mock import MagicMock, patch
 import sys
 
 
 def test_ask_stream_passes_sources_to_retriever():
-    """ask_stream with sources= passes them to get_retriever."""
+    """ask_stream with sources= passes them to build_chain."""
     # Remove cached chain module so patch applies cleanly
     sys.modules.pop("chain", None)
 

@@ -1,10 +1,9 @@
-def test_get_retriever_with_sources_passes_filter(tmp_path, monkeypatch):
+def test_get_retriever_with_sources_passes_filter(monkeypatch):
     """get_retriever with sources= sets a filter on the FAISS retriever."""
     from unittest.mock import MagicMock, patch
 
     fake_db = MagicMock()
-    fake_retriever = MagicMock()
-    fake_db.as_retriever.return_value = fake_retriever
+    fake_db.as_retriever.return_value = MagicMock()
 
     with patch("retriever.os.path.exists", return_value=True), \
          patch("retriever.FAISS.load_local", return_value=fake_db):

@@ -26,7 +26,7 @@ def format_docs(docs):
         for d in docs
     )
 
-def build_chain(sources: list = None):
+def build_chain(sources: list | None = None):
     llm = ChatOllama(model=OLLAMA_MODEL, temperature=0)
     retriever = get_retriever(sources=sources)
     return (
@@ -36,9 +36,9 @@ def build_chain(sources: list = None):
         | StrOutputParser()
     )
 
-def ask(question: str, sources: list = None) -> str:
+def ask(question: str, sources: list | None = None) -> str:
     return build_chain(sources=sources).invoke(question)
 
-def ask_stream(question: str, sources: list = None):
+def ask_stream(question: str, sources: list | None = None):
     for chunk in build_chain(sources=sources).stream(question):
         yield chunk
