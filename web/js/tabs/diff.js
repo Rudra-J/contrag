@@ -116,12 +116,16 @@ function wireSplitSync() {
   if (!left || !right) return;
   let syncing = false;
   left.addEventListener("scroll", () => {
-    if (syncing) return; syncing = true;
-    right.scrollTop = left.scrollTop; syncing = false;
+    if (syncing) return;
+    syncing = true;
+    right.scrollTop = left.scrollTop;
+    setTimeout(() => { syncing = false; }, 0);
   });
   right.addEventListener("scroll", () => {
-    if (syncing) return; syncing = true;
-    left.scrollTop = right.scrollTop; syncing = false;
+    if (syncing) return;
+    syncing = true;
+    left.scrollTop = right.scrollTop;
+    setTimeout(() => { syncing = false; }, 0);
   });
 }
 
@@ -239,7 +243,7 @@ export async function initDiff(toast) {
       } finally {
         btn.disabled = false;
       }
-    });
+    }, { once: true });
   }
 
   await render();

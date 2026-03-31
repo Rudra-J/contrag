@@ -211,38 +211,74 @@ export function renderRedline(hunks) {
     return `<div class="empty-state"><p>The contracts are identical.</p></div>`;
   }
 
-  let html = "";
+  // First pass: build an array of "redline items" — either context lines or change blocks
+  const items = [];
   let i = 0;
-
   while (i < hunks.length) {
     const h = hunks[i];
-
     if (h.type === "context") {
-      html += `<div class="redline-line context">
-        <span class="redline-gutter">${h.line_a}</span>
-        <span class="redline-text">${esc(h.text)}</span>
-      </div>`;
+      items.push({ kind: "context", hunk: h });
       i++;
-      continue;
+    } else {
+      const removed = [], added = [];
+      while (i < hunks.length && hunks[i].type !== "context") {
+        if (hunks[i].type === "removed") removed.push(hunks[i]);
+        else added.push(hunks[i]);
+        i++;
+      }
+      const oldText   = removed.map(r => r.text).join(" ");
+      const newText   = added.map(a => a.text).join(" ");
+      const lineLabel = removed.length ? removed[0].line_a : (added.length ? added[0].line_b : "");
+      const ops       = lcs(tokenise(oldText), tokenise(newText));
+      items.push({ kind: "change", lineLabel, ops });
     }
-
-    const removed = [], added = [];
-    while (i < hunks.length && hunks[i].type !== "context") {
-      if (hunks[i].type === "removed") removed.push(hunks[i]);
-      else added.push(hunks[i]);
-      i++;
-    }
-
-    const oldText = removed.map(r => r.text).join(" ");
-    const newText = added.map(a => a.text).join(" ");
-    const lineLabel = removed.length ? removed[0].line_a : (added.length ? added[0].line_b : "");
-
-    const ops = lcs(tokenise(oldText), tokenise(newText));
-    html += `<div class="redline-line change">
-      <span class="redline-gutter">${lineLabel}</span>
-      <span class="redline-text">${wordDiffHtml(ops)}</span>
-    </div>`;
   }
+
+  // Second pass: collapse context runs, then render
+  let html = "";
+  let ctxBuf = [];
+
+  function flushCtx() {
+    if (ctxBuf.length <= CTX * 2) {
+      for (const item of ctxBuf) {
+        html += `<div class="redline-line context">
+          <span class="redline-gutter">${item.hunk.line_a}</span>
+          <span class="redline-text">${esc(item.hunk.text)}</span>
+        </div>`;
+      }
+    } else {
+      for (const item of ctxBuf.slice(0, CTX)) {
+        html += `<div class="redline-line context">
+          <span class="redline-gutter">${item.hunk.line_a}</span>
+          <span class="redline-text">${esc(item.hunk.text)}</span>
+        </div>`;
+      }
+      html += `<div class="redline-line context">
+        <span class="redline-gutter"></span>
+        <span class="redline-text" style="color:var(--text-dim)">&#8230;</span>
+      </div>`;
+      for (const item of ctxBuf.slice(-CTX)) {
+        html += `<div class="redline-line context">
+          <span class="redline-gutter">${item.hunk.line_a}</span>
+          <span class="redline-text">${esc(item.hunk.text)}</span>
+        </div>`;
+      }
+    }
+    ctxBuf = [];
+  }
+
+  for (const item of items) {
+    if (item.kind === "context") {
+      ctxBuf.push(item);
+    } else {
+      flushCtx();
+      html += `<div class="redline-line change">
+        <span class="redline-gutter">${item.lineLabel}</span>
+        <span class="redline-text">${wordDiffHtml(item.ops)}</span>
+      </div>`;
+    }
+  }
+  flushCtx();
 
   return diffStats(hunks) + `<div class="redline-viewer">${html}</div>`;
 }
