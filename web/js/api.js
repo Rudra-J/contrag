@@ -26,9 +26,35 @@ export async function getDiff(a, b) {
   return r.json();
 }
 
+export async function getDiffRisk(hunks, nameA, nameB) {
+  const r = await fetch(`${BASE}/api/diff/risk`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ hunks, name_a: nameA, name_b: nameB }),
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
 export async function getGlossary(q = "") {
   const url = q ? `${BASE}/api/glossary?q=${encodeURIComponent(q)}` : `${BASE}/api/glossary`;
   const r = await fetch(url);
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+/**
+ * Fetches the top retrieved chunks for a question (used to show sources).
+ * @param {string} question
+ * @param {string[]} sources
+ * @returns {Promise<Array<{source: string, text: string}>>}
+ */
+export async function getChatContext(question, sources) {
+  const r = await fetch(`${BASE}/api/chat/context`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question, sources }),
+  });
   if (!r.ok) throw new Error(await r.text());
   return r.json();
 }
