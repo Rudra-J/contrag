@@ -474,3 +474,267 @@ mark.term-hl { background: rgba(200,168,80,0.25); border-radius: 2px; color: var
 .diff-upload-input {
   display: none;
 }
+
+/* ── Diff inline loader ─────────────────────────────────────────────── */
+.diff-inline-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem 0;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+}
+.diff-inline-loader svg { width: 64px; height: 70px; }
+
+/* ── Mini scales (thinking state on send button) ────────────────────── */
+#chat-send .mini-scales { display: none; }
+#chat-send.thinking .send-content { display: none; }
+#chat-send.thinking .mini-scales { display: block; }
+#chat-send.thinking {
+  cursor: default;
+  background: var(--surface);
+  border: 1px solid var(--border-gold);
+  color: var(--gold);
+  pointer-events: none;
+}
+
+/* ── Per-message scope indicator ────────────────────────────────────── */
+.scope-indicator {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 3px 12px;
+  margin: 2px 0 2px 44px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.scope-label { margin-right: 2px; }
+.scope-file {
+  background: rgba(200, 168, 80, 0.1);
+  color: var(--gold);
+  border: 1px solid rgba(200, 168, 80, 0.3);
+  border-radius: 3px;
+  padding: 1px 6px;
+  font-size: 11px;
+}
+
+/* ── Sources panel (collapsible below assistant bubble) ─────────────── */
+.sources-panel {
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+.sources-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 0;
+  transition: color var(--transition);
+}
+.sources-toggle:hover { color: var(--gold); }
+.sources-toggle svg {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--transition);
+  flex-shrink: 0;
+}
+.sources-toggle.open svg { transform: rotate(180deg); }
+.sources-list {
+  display: none;
+  margin-top: 8px;
+  flex-direction: column;
+  gap: 8px;
+}
+.sources-list.open { display: flex; }
+.source-item {
+  padding: 8px 10px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border-left: 2px solid var(--gold);
+}
+.source-file {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.source-text {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+/* ── Diff mode selector bar ─────────────────────────────────────── */
+.diff-mode-bar {
+  display: flex;
+  gap: 4px;
+  padding: 10px 0 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+.diff-mode-btn {
+  padding: 5px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+.diff-mode-btn:hover { color: var(--text); border-color: var(--text-muted); }
+.diff-mode-btn.active {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ── Side-by-side diff ──────────────────────────────────────────── */
+.diff-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.diff-split-pane {
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+}
+.diff-split-pane:first-child {
+  border-right: 1px solid var(--border);
+}
+.diff-split-header {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase;
+}
+.diff-split-pane .diff-line { min-width: 0; }
+.diff-split-pane .diff-line.empty { background: var(--bg); opacity: 0.4; }
+
+/* ── Redline diff ───────────────────────────────────────────────── */
+.redline-viewer {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  overflow-x: auto;
+}
+.redline-line {
+  display: flex;
+  gap: 0;
+  line-height: 1.6;
+  padding: 2px 0;
+}
+.redline-line.context { background: var(--surface); }
+.redline-line.change  { background: var(--surface-2); }
+.redline-gutter {
+  width: 40px;
+  min-width: 40px;
+  text-align: right;
+  padding: 1px 6px;
+  color: var(--text-dim);
+  user-select: none;
+  border-right: 1px solid var(--border);
+  font-size: 0.78rem;
+}
+.redline-text {
+  padding: 1px 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex: 1;
+  color: var(--text-muted);
+}
+.redline-line.change .redline-text { color: var(--text); }
+del.rl-del {
+  text-decoration: line-through;
+  color: #cf8e8e;
+  background: rgba(158,74,74,0.15);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+ins.rl-ins {
+  text-decoration: underline;
+  text-decoration-color: var(--green);
+  color: #8ecf8e;
+  background: rgba(74,158,74,0.12);
+  border-radius: 2px;
+  padding: 0 1px;
+  font-style: normal;
+}
+
+/* ── Risk analysis diff ─────────────────────────────────────────── */
+.risk-summary-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.risk-summary-card h4 {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.risk-summary-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.risk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 99px;
+  margin-left: 8px;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.risk-badge.risk_increase { background: rgba(158,74,74,0.25); color: #cf8e8e; border: 1px solid rgba(158,74,74,0.4); }
+.risk-badge.risk_decrease { background: rgba(74,158,74,0.2);  color: #8ecf8e; border: 1px solid rgba(74,158,74,0.3); }
+.risk-badge.neutral       { background: rgba(255,255,255,0.05); color: var(--text-dim); border: 1px solid var(--border); }
+.risk-explanation {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  padding: 3px 10px 3px 68px;
+  font-style: italic;
+  line-height: 1.5;
+  background: var(--surface);
+}
+.diff-line.risk_increase { background: rgba(158,74,74,0.12); }
+.diff-line.risk_decrease { background: rgba(74,158,74,0.1); }
+.diff-line.neutral.added,
+.diff-line.neutral.removed { background: var(--surface-2); }
