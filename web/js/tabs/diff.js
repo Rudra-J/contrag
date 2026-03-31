@@ -1,7 +1,15 @@
-import { getFiles, uploadFile, getDiff } from "../api.js";
+import { getFiles, uploadFile, getDiff, getDiffRisk } from "../api.js";
 import { showLoader, hideLoader } from "../loader.js";
+import { renderUnified, renderSideBySide, renderRedline, renderRisk } from "../diff-renderers.js";
 
 let _toast;
+
+// ── Cached diff state ─────────────────────────────────────────────
+let _lastHunks    = null;
+let _lastNameA    = null;
+let _lastNameB    = null;
+let _lastRiskData = null;
+let _currentMode  = "unified";
 
 // ── HTML escaping ─────────────────────────────────────────────────
 
@@ -25,7 +33,7 @@ function buildSlot(id, labelText, names, defaultIndex) {
       <label for="${id}">${esc(labelText)}</label>
       <div class="diff-slot-controls">
         <select id="${id}">${opts}</select>
-        <label class="btn btn-secondary diff-upload-btn" title="Upload a new contract for this slot">
+        <label class="btn btn-ghost diff-upload-btn" title="Upload a new contract for this slot">
           Upload new
           <input class="diff-upload-input" type="file" accept=".pdf,.docx,.txt">
         </label>
@@ -59,56 +67,89 @@ function buildSelectors(files) {
   return selectorBlock;
 }
 
-// ── Diff renderer ─────────────────────────────────────────────────
+// ── Diff result wrapper with mode bar ─────────────────────────────
 
-const CTX = 3;
+const MODES = [
+  { id: "unified",      label: "Unified" },
+  { id: "side-by-side", label: "Side by Side" },
+  { id: "redline",      label: "Redline" },
+  { id: "risk",         label: "Risk Analysis" },
+];
 
-function renderDiff(hunks) {
-  if (!hunks.length) {
-    return `<div class="empty-state"><p>The contracts are identical.</p></div>`;
-  }
-  const added   = hunks.filter(h => h.type === "added").length;
-  const removed = hunks.filter(h => h.type === "removed").length;
+function modeBtns() {
+  return MODES.map(m =>
+    `<button class="diff-mode-btn${m.id === _currentMode ? " active" : ""}" data-mode="${m.id}">${m.label}</button>`
+  ).join("");
+}
 
-  let lines = "";
-  let ctxBuf = [];
-
-  function flushCtx() {
-    if (ctxBuf.length <= CTX * 2) {
-      ctxBuf.forEach(h => { lines += hunkHtml(h); });
-    } else {
-      ctxBuf.slice(0, CTX).forEach(h => { lines += hunkHtml(h); });
-      lines += `<div class="diff-line ellipsis"><span style="padding:0 8px;color:var(--text-dim)">&#8230;</span></div>`;
-      ctxBuf.slice(-CTX).forEach(h => { lines += hunkHtml(h); });
-    }
-    ctxBuf = [];
-  }
-
-  for (const h of hunks) {
-    if (h.type === "context") { ctxBuf.push(h); }
-    else { flushCtx(); lines += hunkHtml(h); }
-  }
-  flushCtx();
-
+function buildResultWrapper(innerHtml) {
   return `
-    <div class="diff-stats">
-      <span class="add">+${added} additions</span> &nbsp;
-      <span class="rem">&#8722;${removed} removals</span>
-    </div>
-    <div class="diff-viewer">${lines}</div>
+    <div class="diff-mode-bar" id="diff-mode-bar">${modeBtns()}</div>
+    <div id="diff-mode-content">${innerHtml}</div>
   `;
 }
 
-function hunkHtml(h) {
-  const prefix = h.type === "added" ? "+" : h.type === "removed" ? "&#8722;" : "&nbsp;";
-  const la = h.line_a ?? "";
-  const lb = h.line_b ?? "";
-  return `<div class="diff-line ${h.type}">
-    <span class="diff-gutter">${la}</span>
-    <span class="diff-gutter">${lb}</span>
-    <span class="diff-prefix">${prefix}</span>
-    <span class="diff-text">${esc(h.text)}</span>
+// ── Inline scales loader HTML ─────────────────────────────────────
+
+const INLINE_LOADER = (label) => `
+  <div class="diff-inline-loader">
+    <svg viewBox="0 0 140 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="66" y="40" width="8" height="96" fill="#b0a080" rx="2"/>
+      <rect x="34" y="132" width="72" height="9" fill="#b0a080" rx="3"/>
+      <circle cx="70" cy="36" r="6" fill="#c8a850"/>
+      <g class="beam-group">
+        <line x1="10" y1="42" x2="130" y2="42" stroke="#c8a850" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="20" y1="42" x2="20" y2="70" stroke="#c8a850" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <line x1="120" y1="42" x2="120" y2="70" stroke="#c8a850" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <g class="pan-left"><ellipse cx="20" cy="74" rx="19" ry="6" fill="#c8a850" opacity="0.9"/></g>
+        <g class="pan-right"><ellipse cx="120" cy="74" rx="19" ry="6" fill="#c8a850" opacity="0.9"/></g>
+      </g>
+    </svg>
+    ${label}
   </div>`;
+
+// ── Scroll sync for side-by-side ─────────────────────────────────
+
+function wireSplitSync() {
+  const left  = document.getElementById("split-left");
+  const right = document.getElementById("split-right");
+  if (!left || !right) return;
+  let syncing = false;
+  left.addEventListener("scroll", () => {
+    if (syncing) return; syncing = true;
+    right.scrollTop = left.scrollTop; syncing = false;
+  });
+  right.addEventListener("scroll", () => {
+    if (syncing) return; syncing = true;
+    left.scrollTop = right.scrollTop; syncing = false;
+  });
+}
+
+// ── Mode rendering ────────────────────────────────────────────────
+
+async function renderMode(mode) {
+  const content = document.getElementById("diff-mode-content");
+  if (!content || !_lastHunks) return;
+
+  if (mode === "unified") {
+    content.innerHTML = renderUnified(_lastHunks);
+  } else if (mode === "side-by-side") {
+    content.innerHTML = renderSideBySide(_lastHunks, _lastNameA, _lastNameB);
+    wireSplitSync();
+  } else if (mode === "redline") {
+    content.innerHTML = renderRedline(_lastHunks);
+  } else if (mode === "risk") {
+    if (!_lastRiskData) {
+      content.innerHTML = INLINE_LOADER("Analysing risks&hellip;");
+      try {
+        _lastRiskData = await getDiffRisk(_lastHunks, _lastNameA, _lastNameB);
+      } catch (e) {
+        content.innerHTML = `<div class="empty-state"><p>Risk analysis failed: ${esc(String(e))}</p></div>`;
+        return;
+      }
+    }
+    content.innerHTML = renderRisk(_lastHunks, _lastRiskData);
+  }
 }
 
 // ── Upload wiring ─────────────────────────────────────────────────
@@ -134,8 +175,6 @@ function wireUploadInputs(container, onUploadComplete) {
         _toast(`Upload failed: ${e.message || e}`, "error");
       } finally {
         hideLoader();
-        // On error path: reset live input to allow re-selecting the same file.
-        // On success path: render() has replaced the DOM; this is a no-op.
         fileInput.value = "";
       }
     });
@@ -152,18 +191,15 @@ export async function initDiff(toast) {
     const files = await getFiles();
     container.innerHTML = buildSelectors(files);
 
-    // If called after an upload, pre-select the new file in the specified slot
     if (selectAfterUpload) {
       const select = document.getElementById(selectAfterUpload.slotId);
       if (select) select.value = selectAfterUpload.filename;
     }
 
-    // Wire upload inputs
     wireUploadInputs(container, async (slotId, filename) => {
       await render({ slotId, filename });
     });
 
-    // Wire compare button
     const btn = document.getElementById("diff-btn");
     if (!btn || btn.disabled) return;
 
@@ -171,14 +207,37 @@ export async function initDiff(toast) {
       const a = document.getElementById("diff-a").value;
       const b = document.getElementById("diff-b").value;
       if (a === b) { _toast("Select two different contracts.", "error"); return; }
-      showLoader("Comparing contracts\u2026");
+
+      btn.disabled = true;
+      const resultEl = document.getElementById("diff-result");
+      resultEl.innerHTML = INLINE_LOADER("Comparing contracts&hellip;");
+
       try {
         const { hunks } = await getDiff(a, b);
-        document.getElementById("diff-result").innerHTML = renderDiff(hunks);
+        _lastHunks    = hunks;
+        _lastNameA    = a;
+        _lastNameB    = b;
+        _lastRiskData = null;
+        _currentMode  = "unified";
+
+        resultEl.innerHTML = buildResultWrapper(renderUnified(hunks));
+
+        resultEl.querySelectorAll(".diff-mode-btn").forEach(modeBtn => {
+          modeBtn.addEventListener("click", async () => {
+            const mode = modeBtn.dataset.mode;
+            if (mode === _currentMode) return;
+            _currentMode = mode;
+            resultEl.querySelectorAll(".diff-mode-btn").forEach(b2 => {
+              b2.classList.toggle("active", b2.dataset.mode === mode);
+            });
+            await renderMode(mode);
+          });
+        });
       } catch(e) {
+        resultEl.innerHTML = "";
         _toast(String(e), "error");
       } finally {
-        hideLoader();
+        btn.disabled = false;
       }
     });
   }
