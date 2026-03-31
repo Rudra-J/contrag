@@ -328,6 +328,26 @@ export function renderRisk(hunks, riskData) {
     neutral:       "Neutral",
   };
 
+  const CLAUSE_LABEL = {
+    payment_terms:    "Payment",
+    liability:        "Liability",
+    indemnification:  "Indemnity",
+    ip_ownership:     "IP",
+    termination:      "Termination",
+    governing_law:    "Governing Law",
+    confidentiality:  "Confidentiality",
+    representations:  "Representations",
+    force_majeure:    "Force Majeure",
+    other:            "Other",
+  };
+
+  function riskAnnotation(risk) {
+    const mitigation = risk.mitigation && risk.mitigation !== "No action required"
+      ? `<p class="risk-mitigation"><strong>Mitigation:</strong> ${esc(risk.mitigation)}</p>`
+      : "";
+    return `<div class="risk-explanation">${esc(risk.explanation)}${mitigation}</div>`;
+  }
+
   let lines = "";
   let ctxBuf = [];
   let currentBlock = -1;
@@ -350,7 +370,7 @@ export function renderRisk(hunks, riskData) {
     if (h.type === "context") {
       if (currentBlock >= 0) {
         const risk = riskMap[currentBlock];
-        if (risk) ctxBuf.push(`<div class="risk-explanation">${esc(risk.explanation)}</div>`);
+        if (risk) ctxBuf.push(riskAnnotation(risk));
         currentBlock = -1;
         badgeEmitted = false;
       }
@@ -372,8 +392,14 @@ export function renderRisk(hunks, riskData) {
       if (showBadge) badgeEmitted = true;
 
       const prefix = h.type === "added" ? "+" : "&#8722;";
+      const clauseTag = (showBadge && risk.clause_type)
+        ? `<span class="clause-type-tag">${esc(CLAUSE_LABEL[risk.clause_type] || risk.clause_type)}</span>`
+        : "";
+      const severityTag = (showBadge && risk.severity)
+        ? `<span class="severity-badge severity-${risk.severity}">${esc(risk.severity)}</span>`
+        : "";
       const badge = showBadge
-        ? `<span class="risk-badge ${risk.risk}">${LABEL[risk.risk] || risk.risk}</span>`
+        ? `${clauseTag}${severityTag}<span class="risk-badge ${risk.risk}">${LABEL[risk.risk] || risk.risk}</span>`
         : "";
 
       lines += `<div class="diff-line ${h.type}${riskClass}">

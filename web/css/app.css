@@ -726,6 +726,32 @@ ins.rl-ins {
 .risk-badge.risk_increase { background: rgba(158,74,74,0.25); color: #cf8e8e; border: 1px solid rgba(158,74,74,0.4); }
 .risk-badge.risk_decrease { background: rgba(74,158,74,0.2);  color: #8ecf8e; border: 1px solid rgba(74,158,74,0.3); }
 .risk-badge.neutral       { background: rgba(255,255,255,0.05); color: var(--text-dim); border: 1px solid var(--border); }
+.clause-type-tag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
+  background: rgba(255,255,255,0.07);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.severity-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.severity-high   { background: rgba(200,50,50,0.2);  color: #e08080; border: 1px solid rgba(200,50,50,0.4); }
+.severity-medium { background: rgba(200,140,50,0.2); color: #e0b870; border: 1px solid rgba(200,140,50,0.4); }
+.severity-low    { background: rgba(80,160,80,0.15); color: #90c890; border: 1px solid rgba(80,160,80,0.3); }
 .risk-explanation {
   font-size: 0.78rem;
   color: var(--text-dim);
@@ -733,6 +759,11 @@ ins.rl-ins {
   font-style: italic;
   line-height: 1.5;
   background: var(--surface);
+}
+.risk-mitigation {
+  margin-top: 3px;
+  font-style: normal;
+  color: var(--text-secondary);
 }
 .diff-line.risk_increase { background: rgba(158,74,74,0.12); }
 .diff-line.risk_decrease { background: rgba(74,158,74,0.1); }

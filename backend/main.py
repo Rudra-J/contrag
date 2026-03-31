@@ -87,16 +87,33 @@ def get_diff(a: str, b: str):
 # ── Diff Risk Analysis ────────────────────────────────────────────────────────
 
 _RISK_SYSTEM = (
-    "You are a legal risk analyst. Review the contract changes below and classify "
-    "each change block.\n\n"
+    "You are a commercial contracts lawyer reviewing a redline between two contract versions. "
+    "Classify each numbered change block by its legal risk impact.\n\n"
+    "High-risk clause categories to watch for:\n"
+    "  payment_terms       — amounts, due dates, late fees, currency, price adjustment\n"
+    "  liability           — caps, uncapped exposure, consequential loss waivers\n"
+    "  indemnification     — scope of indemnity, carve-outs, mutual vs one-sided\n"
+    "  ip_ownership        — assignment, licensing, work-for-hire, background IP\n"
+    "  termination         — convenience termination, cure periods, trigger events\n"
+    "  governing_law       — jurisdiction shift, arbitration vs litigation, seat\n"
+    "  confidentiality     — scope, duration, permitted disclosures\n"
+    "  representations     — accuracy obligations, knowledge qualifiers, survival\n"
+    "  force_majeure       — scope of excused events, notice obligations\n"
+    "  other               — anything that does not fit the above\n\n"
     "Respond ONLY with valid JSON — no markdown, no explanation outside the JSON.\n\n"
     "Format:\n"
-    '{"summary": "<2-3 sentence executive summary>", '
-    '"changes": [{"index": 0, "risk": "<level>", "explanation": "<brief reason>"}]}\n\n'
+    '{"summary": "<2-3 sentence summary naming the highest-impact changes and their practical consequence>", '
+    '"changes": [{"index": 0, "clause_type": "<category>", "risk": "<level>", '
+    '"severity": "<high|medium|low>", "explanation": "<specific legal consequence of this change>", '
+    '"mitigation": "<concrete action to address the risk, or No action required>"}]}\n\n'
     "Risk levels:\n"
     "  risk_increase — adds obligations, tightens deadlines, removes protections\n"
     "  risk_decrease — removes obligations, extends timelines, adds protections\n"
-    "  neutral       — formatting, typos, clarifications, no material impact\n"
+    "  neutral       — formatting, typos, clarifications, no material impact\n\n"
+    "Severity:\n"
+    "  high   — material financial exposure, loss of enforceable rights, or direct litigation risk\n"
+    "  medium — meaningful impact but addressable with standard contract protections\n"
+    "  low    — minor or procedural change with limited practical effect\n"
 )
 
 def _group_change_blocks(hunks: list) -> list:
@@ -204,10 +221,16 @@ async def get_context(body: dict):
     sources = body.get("sources") or None
     if sources is not None and not isinstance(sources, list):
         raise HTTPException(400, "sources must be a list of filenames")
-    from retriever import get_retriever
-    retriever = get_retriever(sources=sources)
-    docs = retriever.invoke(question)
-    return [{"source": d.metadata.get("source", "unknown"), "text": d.page_content} for d in docs]
+    from retriever import retrieve_with_metrics
+    result = retrieve_with_metrics(question, sources=sources)
+    m = result["metrics"]
+    print(f"[metrics] retrieval_ms={m['retrieval_ms']} chunks={m['chunks_retrieved']} "
+          f"(deduped {m['chunks_before_dedup'] - m['chunks_retrieved']}) sources={m['sources']}")
+    return {
+        "docs": [{"source": d.metadata.get("source", "unknown"), "text": d.page_content}
+                 for d in result["docs"]],
+        "metrics": m,
+    }
 
 # ── Static frontend ───────────────────────────────────────────────────────────
 

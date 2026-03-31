@@ -196,7 +196,7 @@ export function initChat(toast) {
     let thinkingCleared = false;
 
     // Fire context fetch in parallel with the LLM stream
-    let contextPromise = getChatContext(question, sources).catch(() => []);
+    let contextPromise = getChatContext(question, sources).then(r => r.docs ?? r).catch(() => []);
 
     streamChat(
       question,
