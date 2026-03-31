@@ -1,5 +1,4 @@
-import { getFiles, streamChat } from "../api.js";
-import { showLoader, hideLoader } from "../loader.js";
+import { getFiles, streamChat, getChatContext } from "../api.js";
 
 function esc(s) {
   return String(s)
@@ -72,6 +71,20 @@ function updateHint() {
   }
 }
 
+// ── Thinking animation ───────────────────────────────────────────
+
+function setThinking(active) {
+  const btn = document.getElementById("chat-send");
+  if (!btn) return;
+  if (active) {
+    btn.classList.add("thinking");
+    btn.disabled = true;
+  } else {
+    btn.classList.remove("thinking");
+    btn.disabled = false;
+  }
+}
+
 // ── Messages ─────────────────────────────────────────────────────
 
 function scrollToBottom() {
@@ -100,6 +113,59 @@ function updateMessage(id, content, streaming = false) {
   scrollToBottom();
 }
 
+/**
+ * Inject a scope indicator row directly after the message element.
+ */
+function renderScopeIndicator(afterMsgId, sources) {
+  if (!sources || sources.length === 0) return;
+  const msgEl = document.getElementById(afterMsgId);
+  if (!msgEl) return;
+  const chips = sources.map(s => `<span class="scope-file">${esc(s)}</span>`).join("");
+  const div = document.createElement("div");
+  div.className = "scope-indicator";
+  div.innerHTML = `<span class="scope-label">Scope:</span>${chips}`;
+  msgEl.insertAdjacentElement("afterend", div);
+}
+
+/**
+ * Append a collapsible sources panel inside the assistant bubble.
+ */
+function appendSources(msgId, chunks) {
+  if (!chunks || chunks.length === 0) return;
+  const bubble = document.querySelector(`#${msgId} .msg-bubble`);
+  if (!bubble) return;
+
+  const items = chunks.map(c => `
+    <div class="source-item">
+      <div class="source-file">${esc(c.source)}</div>
+      <p class="source-text">${esc(c.text)}</p>
+    </div>
+  `).join("");
+
+  const panel = document.createElement("div");
+  panel.className = "sources-panel";
+  panel.innerHTML = `
+    <button class="sources-toggle" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+      ${chunks.length} source${chunks.length !== 1 ? "s" : ""}
+    </button>
+    <div class="sources-list" role="list"></div>
+  `;
+  panel.querySelector(".sources-list").innerHTML = items;
+
+  panel.querySelector(".sources-toggle").addEventListener("click", function () {
+    const list = panel.querySelector(".sources-list");
+    const open = list.classList.toggle("open");
+    this.classList.toggle("open", open);
+    this.setAttribute("aria-expanded", String(open));
+  });
+
+  bubble.appendChild(panel);
+  scrollToBottom();
+}
+
 // ── Init ─────────────────────────────────────────────────────────
 
 export function initChat(toast) {
@@ -117,35 +183,40 @@ export function initChat(toast) {
     if (!question) return;
     input.value = "";
     input.disabled = true;
-    sendBtn.disabled = true;
 
-    renderMessage("user", question);
+    const sources = _taggedSources.size > 0 ? [..._taggedSources] : [];
 
-    showLoader("Thinking…");
+    const userMsgId = renderMessage("user", question);
+    renderScopeIndicator(userMsgId, sources);
+
+    setThinking(true);
     const replyId = renderMessage("assistant", "", true);
 
     let fullAnswer = "";
-    let loaderHidden = false;
+    let thinkingCleared = false;
 
-    const sources = _taggedSources.size > 0 ? [..._taggedSources] : [];
+    // Fire context fetch in parallel with the LLM stream
+    let contextPromise = getChatContext(question, sources).catch(() => []);
 
     streamChat(
       question,
       sources,
       (chunk) => {
-        if (!loaderHidden) { hideLoader(); loaderHidden = true; }
+        if (!thinkingCleared) { setThinking(false); thinkingCleared = true; }
         fullAnswer += chunk;
         updateMessage(replyId, fullAnswer, true);
       },
-      () => {
-        if (!loaderHidden) { hideLoader(); loaderHidden = true; }
+      async () => {
+        if (!thinkingCleared) { setThinking(false); thinkingCleared = true; }
         updateMessage(replyId, fullAnswer, false);
         input.disabled = false;
         sendBtn.disabled = false;
         input.focus();
+        const chunks = await contextPromise;
+        appendSources(replyId, chunks);
       },
       (err) => {
-        if (!loaderHidden) { hideLoader(); loaderHidden = true; }
+        if (!thinkingCleared) { setThinking(false); thinkingCleared = true; }
         updateMessage(replyId, `Error: ${err}`, false);
         input.disabled = false;
         sendBtn.disabled = false;

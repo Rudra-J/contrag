@@ -91,8 +91,8 @@ _RISK_SYSTEM = (
     "each change block.\n\n"
     "Respond ONLY with valid JSON — no markdown, no explanation outside the JSON.\n\n"
     "Format:\n"
-    '{{"summary": "<2-3 sentence executive summary>", '
-    '"changes": [{{"index": 0, "risk": "<level>", "explanation": "<brief reason>"}}]}}\n\n'
+    '{"summary": "<2-3 sentence executive summary>", '
+    '"changes": [{"index": 0, "risk": "<level>", "explanation": "<brief reason>"}]}\n\n'
     "Risk levels:\n"
     "  risk_increase — adds obligations, tightens deadlines, removes protections\n"
     "  risk_decrease — removes obligations, extends timelines, adds protections\n"
