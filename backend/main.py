@@ -120,7 +120,7 @@ def _extract_json(text: str) -> dict:
     return _json.loads(text.strip())
 
 @app.post("/api/diff/risk")
-async def diff_risk(body: dict):
+def diff_risk(body: dict):
     hunks = body.get("hunks")
     if not hunks:
         raise HTTPException(400, "hunks is required")
@@ -128,6 +128,9 @@ async def diff_risk(body: dict):
     name_b = body.get("name_b", "Compare")
 
     blocks = _group_change_blocks(hunks)
+
+    if not blocks:
+        return {"summary": "The contracts are identical.", "changes": []}
 
     changes_text = ""
     for i, block in enumerate(blocks):
@@ -152,6 +155,9 @@ async def diff_risk(body: dict):
         data = _extract_json(result.content)
     except Exception:
         raise HTTPException(500, f"LLM returned invalid JSON: {result.content[:200]}")
+
+    if "summary" not in data or "changes" not in data:
+        raise HTTPException(500, "LLM response missing required fields")
 
     return data
 
