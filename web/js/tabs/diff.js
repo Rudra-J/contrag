@@ -243,7 +243,7 @@ export async function initDiff(toast) {
       } finally {
         btn.disabled = false;
       }
-    }, { once: true });
+    });
   }
 
   await render();
