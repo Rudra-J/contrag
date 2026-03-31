@@ -94,7 +94,7 @@ def _format_context(docs) -> str:
 def run_retrieval_eval(dataset: list, k: int) -> dict:
     from retriever import retrieve_with_metrics
 
-    print(f"\n── Retrieval Eval  k={k}  n={len(dataset)} ──")
+    print(f"\n-- Retrieval Eval  k={k}  n={len(dataset)} --")
 
     reciprocal_ranks   = []
     ranks_when_found   = []
@@ -149,7 +149,7 @@ def run_groundedness_eval(dataset: list) -> dict:
 
     llm = ChatOllama(model=MODEL, temperature=0)
 
-    print(f"\n── Groundedness Eval  n={len(dataset)} ──")
+    print(f"\n-- Groundedness Eval  n={len(dataset)} --")
 
     grounded_count = 0
     skipped        = 0
@@ -241,9 +241,9 @@ def main():
         results["groundedness"] = run_groundedness_eval(dataset)
 
     # ── Summary ───────────────────────────────────────────────────────────────
-    print("\n══════════════════════════════")
+    print("\n==============================")
     print(" Contrag Eval Summary")
-    print("══════════════════════════════")
+    print("==============================")
     if "retrieval" in results:
         r = results["retrieval"]
         print(f" Hit Rate@{r['k']}  : {r['hit_rate']:.3f}")
@@ -253,14 +253,14 @@ def main():
     if "groundedness" in results:
         g = results["groundedness"]
         print(f" Groundedness: {g['groundedness_rate']:.3f}")
-    print("══════════════════════════════")
+    print("==============================")
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
     ts       = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
     out_path = os.path.join(RESULTS_DIR, f"{ts}.json")
     with open(out_path, "w") as f:
         json.dump(results, f, indent=2)
-    print(f"\nFull results → {out_path}")
+    print(f"\nFull results -> {out_path}")
 
 
 if __name__ == "__main__":

@@ -82,7 +82,7 @@ def main():
                         "chunk_index": i,
                     })
                     added += 1
-            print(f"→ {added} questions")
+            print(f"-> {added} questions")
 
         except Exception as e:
             print(f"(skipped — {e})")

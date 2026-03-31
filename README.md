@@ -99,6 +99,33 @@ The diff Risk Analysis mode classifies each change block across ten clause categ
 
 Retrieval latency and chunk counts are logged to the backend console on each chat request.
 
+## Evaluation
+
+Evaluated on 36 synthetically generated questions across 2 contracts (12 chunks). Ground truth generated via `llama3.2`; groundedness judged by `llama3.2` as an LLM-as-judge.
+
+| Metric | Score |
+|--------|-------|
+| Hit Rate@5 | 0.833 |
+| MRR | 0.708 |
+| Mean Rank (when found) | 1.7 |
+| Groundedness | 0.778 |
+
+Run the eval pipeline yourself:
+
+```bash
+# Generate ground truth (once per index)
+python eval/generate_dataset.py
+
+# Run full eval
+python eval/run_eval.py
+
+# Retrieval only (faster, no LLM calls)
+python eval/run_eval.py --retrieval-only
+
+# Spot-check on a sample
+python eval/run_eval.py --sample 20
+```
+
 ## Tech Stack
 
 | Layer | Technology |
