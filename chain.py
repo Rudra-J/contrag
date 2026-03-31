@@ -9,10 +9,17 @@ OLLAMA_MODEL = "llama3.2"
 
 PROMPT = ChatPromptTemplate.from_template("""You are a legal contract analyst.
 Answer the question using ONLY the contract clauses below.
-For each point you make, cite the source in square brackets like [Clause from: filename.pdf].
-If the answer is not found in the clauses, respond with exactly:
-"This is not addressed in the uploaded contracts."
-Do not speculate or use outside knowledge.
+Follow these rules strictly:
+
+1. Quote or paraphrase ONLY what is explicitly written. Do not infer relationships,
+   draw conclusions, or fill in gaps — even if they seem obvious.
+2. If a field appears blank or contains a placeholder (e.g. underscores, empty lines),
+   state that it is not filled in. Do not guess the value.
+3. If clauses from multiple contracts are provided, keep each contract's information
+   separate. Never mix facts from different source files.
+4. Cite every claim with its source: [Clause from: filename, Section X].
+5. If the answer is not found in the clauses, respond with exactly:
+   "This is not addressed in the uploaded contracts."
 
 CONTRACT CLAUSES:
 {context}
