@@ -1,1 +1,1452 @@
-{}
+{
+  "service agreement": {
+    "legal": "A written contract between two parties outlining the terms of a service provided by one party to another.",
+    "layman": "An agreement between companies that outlines the scope of work and payment terms for a specific service.",
+    "example": "The company hired a consulting firm to improve their marketing strategy, and they signed a service agreement outlining the scope of work and payment terms.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "This Service Agreement (Demo Contract)",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "This Service Agreement (Demo Contract)",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "effective date": {
+    "legal": "The date on which a contract or agreement becomes enforceable.",
+    "layman": "The date when a contract or agreement starts to be legally binding.",
+    "example": "The company's new employee started working on January 1st, and the employment contract became effective on that date.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "on 1st January 2026 (Effective Date)",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "on 1st January 2026",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "client": {
+    "legal": "A party to a contract who receives the goods or services under the agreement.",
+    "layman": "The person or company that hires a service provider.",
+    "example": "ABC Inc. is the client, and XYZ Corp. is the service provider.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "AlphaTech Solutions Pvt. Ltd., a company incorporated under the laws of India, having its registered office at Mumbai, Maharashtra (Client)",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "AlphaTech Solutions Pvt. Ltd., a company incorporated under the laws of India, having its registered office at Mumbai, Maharashtra",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "service provider": {
+    "legal": "A party to a contract who provides the goods or services under the agreement.",
+    "layman": "The person or company that offers a service to another company.",
+    "example": "ABC Inc. is the client, and XYZ Corp. is the service provider.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "DataForge Analytics LLP, a limited liability partnership registered in India, having its principal office at Bengaluru, Karnataka (Service Provider)",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "DataForge Analytics LLP, a limited liability partnership registered in India, having its principal office at Bengaluru, Karnataka",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "definitions": {
+    "legal": "A section of a contract that defines key terms and their meanings.",
+    "layman": "A part of the contract that explains what certain words or phrases mean.",
+    "example": "The contract included definitions for common terms like 'contractor' and 'scope of work'.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "1. DEFINITIONS",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "1. DEFINITIONS",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "deliverables": {
+    "legal": "Goods or services provided by one party to another under a contract.",
+    "layman": "The things that are produced or provided as part of a service agreement.",
+    "example": "The company hired a consulting firm to improve their marketing strategy, and they received deliverables including reports and models.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "1.2 Deliverables means all reports, models, code, and documentation produced under this Agreement.",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "1.3 \"Deliverables\" means all reports, models, code, and documentation produced under this Agreement.",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "confidential information": {
+    "legal": "Information that is not publicly known and is shared between parties to a contract for their mutual benefit.",
+    "layman": "Secret or sensitive information shared between companies as part of a business agreement.",
+    "example": "The company shared confidential information about their new product with the supplier, but it was kept secret from competitors.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "1.3 Confidential Information means any non-public information disclosed by either party.",
+        "chunk_index": 0
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "1.2 \"Deliverables\" means all reports, models, code, and documentation produced under this Agreement.",
+        "chunk_index": 0
+      },
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Hold all Confidential Information in strict confidence",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "term": {
+    "legal": "The duration of an agreement or contract.",
+    "layman": "The length of time something is supposed to last.",
+    "example": "The company will operate for a term of five years.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "Term means the duration of this Agreement as defined in Section 2.",
+        "chunk_index": 1
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "Term means the duration of this Agreement as defined in Section 2.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "section": {
+    "legal": "A subdivision or division within an act, law, or contract that deals with a specific topic or issue.",
+    "layman": "A part of a document that focuses on one particular aspect.",
+    "example": "The new policy is outlined in Section 3 of the constitution.",
+    "sources": [
+      {
+        "file": "rag_demo1.docx",
+        "chunk": "as defined in Section 2.",
+        "chunk_index": 1
+      },
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "as defined in Section 2.",
+        "chunk_index": 1
+      },
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "annexure": {
+    "legal": "A document or appendix attached to a contract as additional information.",
+    "layman": "An extra document that is added to a contract for more details.",
+    "example": "The contract included an annexure with the company's business plan and financial projections.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "as described in Annexure A",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "limited liability partnership": {
+    "legal": "A type of business structure that limits partners' personal liability for debts.",
+    "layman": "A type of business partnership where partners are not personally responsible for the company's debts.",
+    "example": "The startup was formed as a limited liability partnership to minimize risk for its founders.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "a limited liability partnership registered in India",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "principal office": {
+    "legal": "The main location of a business or organization.",
+    "layman": "The company's headquarters or main address.",
+    "example": "The CEO's office is located at the principal office in Bengaluru.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "having its principal office at Bengaluru, Karnataka",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "registered": {
+    "legal": "A legal status indicating that a business has been officially recognized by the government.",
+    "layman": "A company or organization that is officially registered with the authorities.",
+    "example": "The company was registered in India and obtained necessary licenses to operate.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "a company incorporated under the laws of India",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "incorporated": {
+    "legal": "To be formally established as a separate entity, often with limited liability.",
+    "layman": "To become a new company with its own identity and legal status.",
+    "example": "The company was incorporated in 2010 to expand its operations globally.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "a company incorporated under the laws of India",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "laws": {
+    "legal": "Statutes or regulations that govern a particular area of law.",
+    "layman": "Rules or codes that regulate behavior in a specific field, such as business or finance.",
+    "example": "The company must comply with the laws regulating data protection and privacy.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "under the laws of India",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "liability": {
+    "legal": "A state of being responsible for something, often in a financial or legal sense.",
+    "layman": "Being accountable for something, such as debts or damages.",
+    "example": "The company's liability for the accident was limited to $1 million.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "a limited liability partnership",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "partnership": {
+    "legal": "A business relationship between two or more parties who share profits and losses.",
+    "layman": "A business arrangement where partners work together and share the risks and rewards.",
+    "example": "The startup was formed as a partnership between friends to develop a new product.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "a limited liability partnership",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "debt": {
+    "legal": "An amount owed by one party to another, often with interest.",
+    "layman": "A sum of money that one person owes to another, usually with additional charges.",
+    "example": "The company had a debt of $10 million that needed to be paid off quickly.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "projections": {
+    "legal": "Predictions or estimates of future financial performance.",
+    "layman": "Forecasts or estimates of how well a business will do in the future.",
+    "example": "The company's financial projections indicated a strong potential for growth.",
+    "sources": [
+      {
+        "file": "rag_demo2.docx",
+        "chunk": "and financial projections",
+        "chunk_index": 0
+      }
+    ]
+  },
+  "permitted purpose": {
+    "legal": "A lawful objective or goal that is authorized by the terms of an agreement.",
+    "layman": "The reason you agreed to do something in a contract.",
+    "example": "She was only allowed to use the software for her permitted purpose, which was data analysis.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Permitted Purpose means evaluation of a potential business collaboration between the parties.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "representatives": {
+    "legal": "Employees, directors, officers, advisors, or agents of a party who have a need to know confidential information.",
+    "layman": "People working for an organization who need access to sensitive information.",
+    "example": "The CEO's assistant is considered a representative and needs to know the company's financial data.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Representatives means employees, directors, officers, advisors, or agents of the Receiving Party who have a need to know the Confidential Information.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "obligations": {
+    "legal": "Duties or responsibilities that one party has towards another party under a contract.",
+    "layman": "What you agree to do for someone else as part of a contract.",
+    "example": "The company's obligations include providing quality products and services.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "2. OBLIGATIONS OF RECEIVING PARTY",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "receiving party": {
+    "legal": "The party that receives confidential information under a contract.",
+    "layman": "The person or organization that gets sensitive information from someone else.",
+    "example": "The company is the receiving party for the confidential customer data.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "2.1 The Receiving Party agrees to:",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "strict confidence": {
+    "legal": "A duty to maintain secrecy and not disclose confidential information to anyone.",
+    "layman": "A promise to keep sensitive information private and not share it with others.",
+    "example": "The employee promised to keep the company's financial data secret.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Hold all Confidential Information in strict confidence",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "reverse engineer": {
+    "legal": "To analyze or disassemble a product or technology to understand its inner workings.",
+    "layman": "To take apart something complex to figure out how it works.",
+    "example": "The company can't reverse engineer their competitor's software without permission.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "2.2 The Receiving Party shall not reverse engineer, disassemble, or decompile any prototypes, software, or tangible objects that embody the Confidential Information.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "decompile": {
+    "legal": "To convert a compiled program into an intermediate form to analyze its structure.",
+    "layman": "To turn a computer program from code into a simpler format so you can understand it better.",
+    "example": "The company can't decompile their own software without permission from the developer.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "2.2 The Receiving Party shall not reverse engineer, disassemble, or decompile any prototypes, software, or tangible objects that embody the Confidential Information.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "tangible objects": {
+    "legal": "Physical items that have a physical presence, as opposed to intangible information.",
+    "layman": "Things you can touch and hold, like products or equipment.",
+    "example": "The company's prototypes are tangible objects that contain confidential information.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "2.2 The Receiving Party shall not reverse engineer, disassemble, or decompile any prototypes, software, or tangible objects that embody the Confidential Information.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "need-to-know": {
+    "legal": "A principle of confidentiality where access to sensitive information is limited to those who need it.",
+    "layman": "The idea that only people who really need to know something should be told.",
+    "example": "The employee was only given access to the customer data because she needed to know it for her job.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Disclose Confidential Information only to its Representatives on a need-to-know basis",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "reasonable security measures": {
+    "legal": "Measures that are sufficient and adequate to protect confidential information from unauthorized access or disclosure.",
+    "layman": "Steps you take to keep sensitive information safe, like using strong passwords or encryption.",
+    "example": "The company uses two-factor authentication to protect its confidential data.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "Implement reasonable security measures to protect Confidential Information",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "unauthorized use": {
+    "legal": "Use of confidential information without authorization, in violation of a contractual obligation to maintain confidentiality.",
+    "layman": "Using someone else's confidential information without their permission.",
+    "example": "She was fired for unauthorized use of her company's trade secrets.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "any unauthorized use or disclosure of Confidential Information.",
+        "chunk_index": 3
+      }
+    ]
+  },
+  "disclosing party": {
+    "legal": "A party to this contract who has disclosed confidential information, and is subject to obligations of confidentiality.",
+    "layman": "The person or company that shared sensitive information with another party.",
+    "example": "Johnson was the Disclosing Party in the trade secret lawsuit.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "the Disclosing Party",
+        "chunk_index": 3
+      }
+    ]
+  },
+  "breach": {
+    "legal": "A violation of a contractual obligation or duty.",
+    "layman": "When one party fails to fulfill their part of the agreement.",
+    "example": "If John fails to pay his rent on time, it's considered a breach of contract.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.1 The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "confidentiality": {
+    "legal": "The protection of sensitive information from unauthorized disclosure or use.",
+    "layman": "Keeping secret information private and secure.",
+    "example": "A company must keep its financial data confidential to protect its competitive advantage.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "4.3 The confidentiality obligations shall survive termination for a further period of 3 years with respect to trade secrets.",
+        "chunk_index": 5
+      },
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "5. CONFIDENTIALITY",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "equitable remedies": {
+    "legal": "Remedies that are based on fairness and justice, rather than strict law.",
+    "layman": "Fair solutions that go beyond what's required by law.",
+    "example": "A court may grant an equitable remedy if one party has acted unfairly.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.2 The Disclosing Party shall be entitled to seek injunctive relief, specific performance, and any other equitable or legal remedies available without the requirement to post a bond.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "exclusive jurisdiction": {
+    "legal": "The right of a court to hear and decide a case without interference from other courts.",
+    "layman": "A court has the power to make final decisions on a case without being appealed.",
+    "example": "Only the courts in Hyderabad, Telangana can hear disputes under this contract.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "6. GOVERNING LAW AND JURISDICTION This Agreement shall be governed by and construed in accordance with the laws of India. The courts of Hyderabad, Telangana shall have exclusive jurisdiction over any disputes arising under this Agreement.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "injunctive relief": {
+    "legal": "A court order that requires a party to stop doing something or take a specific action.",
+    "layman": "A court may order someone to stop violating the terms of an agreement.",
+    "example": "If John violates the contract, the court may grant injunctive relief to stop him.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.2 The Disclosing Party shall be entitled to seek injunctive relief, specific performance, and any other equitable or legal remedies available without the requirement to post a bond.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "irreparable harm": {
+    "legal": "Harm that cannot be fixed or compensated for by money.",
+    "layman": "Damage that can't be repaired with compensation.",
+    "example": "If John's actions cause irreparable harm to his business partner, the court may grant special remedies.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.1 The Receiving Party acknowledges that any breach of this Agreement may cause irreparable harm to the Disclosing Party.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "non-exclusive": {
+    "legal": "The right of a party to pursue other options or relationships without restriction.",
+    "layman": "A party can work with others without being tied down exclusively.",
+    "example": "John's contract allows him to work with multiple clients at the same time.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.3 All remedies are cumulative and non-exclusive.",
+        "chunk_index": 5
+      },
+      {
+        "file": "software_license.docx",
+        "chunk": "non-exclusive, non-transferable, revocable",
+        "chunk_index": 2
+      },
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4.2 The Contractor retains ownership of pre-existing tools, templates, design systems, and personal libraries (",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "remedies": {
+    "legal": "The actions taken by a party to enforce their rights or obligations under an agreement.",
+    "layman": "The ways in which one party can take action against another for breaking the rules.",
+    "example": "If John breaks his contract, he may face penalties and fines as remedies.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5. REMEDIES",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "specific performance": {
+    "legal": "A court order requiring a party to perform a specific action or fulfill a specific obligation.",
+    "layman": "A court may order someone to do something exactly as specified in the contract.",
+    "example": "If John fails to deliver goods, the court may grant specific performance to complete the delivery.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "5.2 The Disclosing Party shall be entitled to seek injunctive relief, specific performance, and any other equitable or legal remedies available without the requirement to post a bond.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "trade secrets": {
+    "legal": "Confidential information that is valuable and not publicly known.",
+    "layman": "Secret information that gives one company an advantage over others.",
+    "example": "A company's recipe for its best-selling product is a trade secret.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "4.3 The confidentiality obligations shall survive termination for a further period of 3 years with respect to trade secrets.",
+        "chunk_index": 5
+      }
+    ]
+  },
+  "entire agreement": {
+    "legal": "A complete and definitive statement of the terms and conditions of a contract, superseding all prior agreements or understandings.",
+    "layman": "The final and only agreement between two parties regarding the terms of their contract.",
+    "example": "The entire agreement was signed on 15th February 2026, making it the final and binding contract between the two companies.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.1 This Agreement constitutes the entire agreement between the parties regarding confidentiality",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "provision": {
+    "legal": "A specific clause or section within a contract that outlines particular terms or conditions.",
+    "layman": "A single part of a contract that deals with a specific aspect of the agreement.",
+    "example": "The company's policy on data protection is outlined in Section 3 of the contract as a separate provision.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "supersedes": {
+    "legal": "To take the place of something earlier, rendering it obsolete or null and void.",
+    "layman": "To replace an earlier agreement or understanding with a new one that takes its place.",
+    "example": "The new contract supersedes all previous agreements between the two companies regarding confidentiality.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.1 This Agreement constitutes the entire agreement between the parties regarding confidentiality and supersedes all prior discussions on the subject.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "amended": {
+    "legal": "To make changes or additions to a contract, document, or agreement.",
+    "layman": "To modify or update an existing contract or agreement in some way.",
+    "example": "The company's contract was amended to include new terms and conditions regarding employee benefits.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.2 This Agreement may not be amended except by a written instrument signed by both parties.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "instrument": {
+    "legal": "A document or writing that serves as evidence of a person's authority, power, or intent.",
+    "layman": "A formal document that proves someone has the right to do something or make a decision.",
+    "example": "The lawyer signed an instrument confirming her client's ownership of the property.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.2 This Agreement may not be amended except by a written instrument signed by both parties.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "unenforceable": {
+    "legal": "Lacking the power or authority to be enforced or upheld in a court of law.",
+    "layman": "Unable to be used or relied upon in a legal context.",
+    "example": "The contract clause was deemed unenforceable due to a technicality, leaving the agreement invalid.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "continues": {
+    "legal": "To remain in effect or operation despite an issue or problem that affects one part of it.",
+    "layman": "To stay valid or effective even if a particular aspect of it is no longer applicable.",
+    "example": "The company's policy continues to apply to all employees, despite the unenforceable clause being removed.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "full force": {
+    "legal": "In effect or operation from start to finish, without any limitations or restrictions.",
+    "layman": "Working completely and fully, with no exceptions or limitations.",
+    "example": "The company's contract was signed in full force, meaning all terms and conditions were binding.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "superseding": {
+    "legal": "Taking the place of something earlier, rendering it obsolete or null and void.",
+    "layman": "Replacing an earlier agreement or understanding with a new one that takes its place.",
+    "example": "The new contract superseded all previous agreements between the two companies regarding confidentiality.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.1 This Agreement constitutes the entire agreement between the parties regarding confidentiality and supersedes all prior discussions on the subject.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "prior": {
+    "legal": "Coming before something else in time or sequence.",
+    "layman": "Happening or existing before something else, often in a previous stage or period.",
+    "example": "The company's policy was established prior to the contract being signed.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.1 This Agreement constitutes the entire agreement between the parties regarding confidentiality and supersedes all prior discussions on the subject.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "discussions": {
+    "legal": "Conversations or negotiations about a particular topic or issue.",
+    "layman": "Talks or meetings about a specific subject or problem.",
+    "example": "The company had several discussions with potential investors before signing the contract.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.1 This Agreement constitutes the entire agreement between the parties regarding confidentiality and supersedes all prior discussions on the subject.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "written": {
+    "legal": "Written down in words or symbols, often used to create a formal document or record.",
+    "layman": "Created using written language, such as words or letters.",
+    "example": "The lawyer signed a written instrument confirming her client's ownership of the property.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.2 This Agreement may not be amended except by a written instrument signed by both parties.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "signed": {
+    "legal": "To put one's name or mark to a document, agreement, or contract, indicating acceptance or approval.",
+    "layman": "To write your name or initials next to a document or agreement, showing you agree with its terms.",
+    "example": "The lawyer signed the contract, confirming her client's ownership of the property.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.2 This Agreement may not be amended except by a written instrument signed by both parties.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "both": {
+    "legal": "Both parties or individuals involved in an agreement or contract.",
+    "layman": "Both sides or people who are part of the agreement or contract.",
+    "example": "The company and its partner signed a joint agreement, outlining their shared responsibilities.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.2 This Agreement may not be amended except by a written instrument signed by both parties.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "provisions": {
+    "legal": "Specific clauses or sections within a contract that outline particular terms or conditions.",
+    "layman": "Individual parts of a contract that deal with specific aspects of the agreement.",
+    "example": "The company's policy on data protection is outlined in Section 3 of the contract as separate provisions.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "continuing": {
+    "legal": "Remaining in effect or operation despite an issue or problem that affects one part of it.",
+    "layman": "Staying valid or effective even if a particular aspect of it is no longer applicable.",
+    "example": "The company's policy continues to apply to all employees, despite the unenforceable clause being removed.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "full": {
+    "legal": "Complete or entire, without any limitations or restrictions.",
+    "layman": "Working completely and fully, with no exceptions or limitations.",
+    "example": "The company's contract was signed in full force, meaning all terms and conditions were binding.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "force": {
+    "legal": "Power or authority to enforce or carry out a contract or agreement.",
+    "layman": "The ability to make something happen or take action according to a contract or agreement.",
+    "example": "The company's contract had the full force of the law behind it, making it binding and enforceable.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "remains": {
+    "legal": "To stay in effect or operation despite an issue or problem that affects one part of it.",
+    "layman": "Staying valid or effective even if a particular aspect of it is no longer applicable.",
+    "example": "The company's policy remains in effect, despite the unenforceable clause being removed.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "removal": {
+    "legal": "To take away or eliminate something, often a part of a contract or agreement.",
+    "layman": "To get rid of or cancel out an aspect of a contract or agreement.",
+    "example": "The company removed the unenforceable clause from its contract, making it more effective.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "clause": {
+    "legal": "A specific part of a contract that outlines particular terms or conditions.",
+    "layman": "An individual part of a contract that deals with a specific aspect of the agreement.",
+    "example": "The company's policy on data protection is outlined in Section 3 of the contract as separate clauses.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "binding": {
+    "legal": "Having the power or authority to enforce or carry out a contract or agreement.",
+    "layman": "Making something happen or take action according to a contract or agreement.",
+    "example": "The company's contract was signed in full force, making all terms and conditions binding.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "7.3 If any provision is found to be unenforceable, the remaining provisions shall continue in full force.",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "effective": {
+    "legal": "Having the power or authority to enforce or carry out a contract or agreement.",
+    "layman": "Making something happen or take action according to a contract or agreement.",
+    "example": "The company's policy is effective immediately, requiring all employees to follow the new guidelines.",
+    "sources": [
+      {
+        "file": "nda_agreement.docx",
+        "chunk": "",
+        "chunk_index": 6
+      }
+    ]
+  },
+  "reasonable modification": {
+    "legal": "A modification to an employee's duties that is justified by the employer, taking into account the employee's role and experience.",
+    "layman": "An adjustment to a job that makes sense given the employee's skills and experience.",
+    "example": "The company can change the employee's responsibilities if it affects their salary or benefits in a reasonable way.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "provided such modifications are consistent with the Employee's role and experience.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "applicable law": {
+    "legal": "A statute, regulation, or court decision that governs a particular situation or industry.",
+    "layman": "The laws or rules that apply to a specific case or circumstance.",
+    "example": "The company must follow the labor laws in the state where it operates.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Provident Fund contributions as per applicable law",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "individual performance targets": {
+    "legal": "Specific goals and objectives set for an employee to achieve, often tied to their salary or bonuses.",
+    "layman": "Personal goals that an employee must meet to receive a raise or bonus.",
+    "example": "The company sets specific sales targets for each employee to reach by the end of the year.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "subject to meeting individual and company performance targets as determined annually.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "company performance targets": {
+    "legal": "Group goals and objectives set for an organization, often tied to its overall success or financial performance.",
+    "layman": "Company-wide goals that affect the entire business's success.",
+    "example": "The company sets a target to increase sales by 10% within the next quarter.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "subject to meeting individual and company performance targets as determined annually.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "annual leave": {
+    "legal": "A type of paid time off granted to employees for rest, recreation, or personal reasons.",
+    "layman": "Paid vacation days that employees can use to relax or take care of personal matters.",
+    "example": "The employee is entitled to 18 days of annual leave per year.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "18 days paid annual leave per year",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "sick leave": {
+    "legal": "A type of paid time off granted to employees for illness or medical reasons.",
+    "layman": "Paid time off for employees who are sick or injured.",
+    "example": "The employee can take up to 10 days of sick leave per year.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "10 days sick leave per year",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "casual leave": {
+    "legal": "A type of paid time off granted to employees for personal reasons, often without a specific purpose or requirement.",
+    "layman": "Paid time off for employees to take care of personal matters, such as appointments or errands.",
+    "example": "The employee can take up to 5 days of casual leave per year.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "5 days casual leave per year",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "course of employment": {
+    "legal": "The period during which an employee is actively engaged in their duties and responsibilities.",
+    "layman": "The time spent working on a job or project.",
+    "example": "She worked on the course of employment for three years before quitting.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Expenses reasonably incurred in the course of employment",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "reimbursed": {
+    "legal": "To pay back an amount that was previously paid to an employee as part of their compensation.",
+    "layman": "To give money back to someone who had it before.",
+    "example": "The company will be reimbursed for the expenses incurred during the course of employment.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "shall be reimbursed within 30 days",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "primary work location": {
+    "legal": "The main or designated place where an employee is expected to perform their duties.",
+    "layman": "The main office where someone works.",
+    "example": "The primary work location for John is the office in Bengaluru.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "The Employee's primary work location shall be",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "discretion": {
+    "legal": "The power or authority to make decisions or take actions without being required to follow a specific procedure or rule.",
+    "layman": "The freedom to decide something on your own.",
+    "example": "The Engineering Manager has discretion over who can work remotely.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "for up to 3 days per week at the discretion",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "compensation": {
+    "legal": "Payment or benefits given to an employee in exchange for their work.",
+    "layman": "Money or other benefits that someone gets for working.",
+    "example": "The company's compensation package includes health insurance and retirement plans.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "as part of their compensation",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "duties": {
+    "legal": "Specific tasks or responsibilities assigned to an employee as part of their job.",
+    "layman": "Things that someone has to do for their job.",
+    "example": "Her duties included managing the team and meeting sales targets.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "as part of their employment",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "responsibilities": {
+    "legal": "The obligations or tasks assigned to an employee as part of their job.",
+    "layman": "Things that someone is in charge of doing for their job.",
+    "example": "He felt overwhelmed by his responsibilities and decided to quit.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "as part of their employment",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "office": {
+    "legal": "A building or room where business or administrative work is done.",
+    "layman": "A place where people go to do work or meet with others.",
+    "example": "The office was located in a quiet neighborhood.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "in Bengaluru",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "monday": {
+    "legal": "The first day of the week, typically observed as a day of rest or celebration.",
+    "layman": "One of the days of the week that comes after Sunday and before Tuesday.",
+    "example": "She worked on Monday morning before taking the day off.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Monday to Friday",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "friday": {
+    "legal": "The last day of the workweek, typically observed as a day of rest or celebration.",
+    "layman": "One of the days of the week that comes after Thursday and before Saturday.",
+    "example": "He worked late on Friday to finish his project.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Monday to Friday",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "week": {
+    "legal": "A period of seven consecutive days, typically used as a unit of time for work or other activities.",
+    "layman": "A group of seven days that make up a cycle of time.",
+    "example": "The week ended on Friday and she was looking forward to the weekend.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Monday to Friday",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "remote": {
+    "legal": "Working or located outside of a traditional office setting, often using technology to stay connected with colleagues and clients.",
+    "layman": "Not in the same place as others, but still able to work or communicate.",
+    "example": "She worked remotely from home on certain days of the week.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Remote work may be permitted",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "permitted": {
+    "legal": "Allowed or approved by law, regulation, or agreement.",
+    "layman": "Okayed or allowed to happen.",
+    "example": "The company is permitted to have a flexible schedule on certain days.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "at the discretion of the Engineering Manager",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "discretionary": {
+    "legal": "Relating to the power or authority to make decisions or take actions without being required to follow a specific procedure or rule.",
+    "layman": "Based on someone's judgment or choice.",
+    "example": "The manager used her discretion when deciding which employee to promote.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "at the discretion of the Engineering Manager",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "up to": {
+    "legal": "A maximum amount or duration, often used in conjunction with a specific limit or threshold.",
+    "layman": "As far as something goes, but not beyond.",
+    "example": "He can work up to 3 days per week remotely.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "for up to 3 days",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "per week": {
+    "legal": "A period of seven consecutive days, often used to describe a regular or recurring schedule.",
+    "layman": "One of the seven days that make up a cycle of time.",
+    "example": "She works 4 hours per week as a freelancer.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "for up to 3 days per",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "weekdays": {
+    "legal": "Days of the week, excluding weekends or holidays.",
+    "layman": "Days when school is not in session and most businesses are open.",
+    "example": "The office was closed on weekdays for a holiday.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Monday to Friday",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "office hours": {
+    "legal": "The specific times during which an employee or business is available to receive customers, clients, or visitors.",
+    "layman": "The time when someone can go see you or talk to you.",
+    "example": "The office hours are from 9:00 AM to 5:00 PM.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Standard working hours",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "standard": {
+    "legal": "Conforming to a norm, rule, or expectation, often used to describe a typical or expected level of quality or performance.",
+    "layman": "Typical or usual.",
+    "example": "The standard for the exam was very high.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "Standard working hours",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "bengaluru": {
+    "legal": "A city in the state of Karnataka, India, known for its technological and economic hubs.",
+    "layman": "A city in southern India that is home to many tech companies.",
+    "example": "The company's office is located in Bengaluru.",
+    "sources": [
+      {
+        "file": "employment_agreement.docx",
+        "chunk": "The Employee's primary work location shall be",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "authorized users": {
+    "legal": "Refers to individuals with explicit permission from a licensor to use or access licensed materials.",
+    "layman": "People who have been given permission by the company to use their software.",
+    "example": "The IT department is authorized to install updates on all computers in the office.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "Authorized Users means employees and contractors of the Licensee who are permitted to access the Software.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "employees": {
+    "legal": "Refers to individuals employed by an organization, typically in exchange for compensation or other benefits.",
+    "layman": "People who work for a company in exchange for money or other perks.",
+    "example": "John is an employee of XYZ Corporation and receives a salary every month.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "Authorized Users means employees and contractors of the Licensee who are permitted to access the Software.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "contractors": {
+    "legal": "Refers to individuals hired by an organization on a temporary or project basis, often for specialized skills.",
+    "layman": "People who work for a company on a short-term or freelance basis, often for specific tasks.",
+    "example": "Jane is a contractor who helps the marketing team with social media management.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "Authorized Users means employees and contractors of the Licensee who are permitted to access the Software.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "licensee": {
+    "legal": "Refers to the party that holds the rights to use or license a product, service, or intellectual property.",
+    "layman": "The person or company that has permission to use someone else's software or technology.",
+    "example": "ABC Inc. is the licensee of DEF Software and pays an annual fee for its use.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "Authorized Users means employees and contractors of the Licensee who are permitted to access the Software.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "software": {
+    "legal": "Refers to a set of instructions or programs that tell a computer what to do.",
+    "layman": "A program or set of programs that run on a computer, such as Microsoft Office or Google Chrome.",
+    "example": "The company uses specialized software for accounting and bookkeeping.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "Authorized Users means employees and contractors of the Licensee who are permitted to access the Software.",
+        "chunk_index": 1
+      }
+    ]
+  },
+  "non-transferable": {
+    "legal": "A license that cannot be transferred or assigned to another party.",
+    "layman": "A license that you can't sell or give away to someone else.",
+    "example": "The company's non-transferable license means they can't pass it on to a new employee.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "non-exclusive, non-transferable, revocable",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "revocable": {
+    "legal": "A license that can be terminated or revoked by the licensor at any time.",
+    "layman": "A license that the company can take back at any time.",
+    "example": "The company's revocable license means they can stop using our software if they want to.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "non-exclusive, non-transferable, revocable",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "sublicense": {
+    "legal": "To grant permission for another party to use the software under a license agreement.",
+    "layman": "To let someone else use your software without owning it.",
+    "example": "The company can sublicense our software to their partners, but only with our permission.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "The Licensee may not sublicense, resell, distribute, or transfer the Software",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "resell": {
+    "legal": "To sell or give away the software to another party without a license agreement.",
+    "layman": "To sell or give away your software to someone else.",
+    "example": "The company can't resell our software to their customers, only use it internally.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "The Licensee may not sublicense, resell, distribute, or transfer the Software",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "distribute": {
+    "legal": "To make the software available to another party for use or sale.",
+    "layman": "To share your software with someone else.",
+    "example": "The company can't distribute our software to their competitors, only to their own customers.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "The Licensee may not sublicense, resell, distribute, or transfer the Software",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "transfer": {
+    "legal": "To assign or pass on the rights and obligations of a license agreement to another party.",
+    "layman": "To give someone else your software and all its rights.",
+    "example": "The company can't transfer their license to a new employee, only use it internally.",
+    "sources": [
+      {
+        "file": "software_license.docx",
+        "chunk": "The Licensee may not sublicense, resell, distribute, or transfer the Software",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "independent contractor": {
+    "legal": "An individual who performs services under a contract without being an employee of the contracting party.",
+    "layman": "A person who works on their own and is not considered an employee of the company they're working for.",
+    "example": "The freelancer was hired as an independent contractor to work on the project.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.1 The Contractor is an independent contractor and not an employee, agent, or partner of the Company.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "agent": {
+    "legal": "A person authorized to act on behalf of another party in contractual matters.",
+    "layman": "Someone who acts on behalf of a company in business dealings.",
+    "example": "The real estate agent helped sell the house.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.1 The Contractor is an independent contractor and not an employee, agent, or partner of the Company.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "partner": {
+    "legal": "A person who shares ownership and control of a business with another party.",
+    "layman": "Someone who owns and controls part of a company alongside others.",
+    "example": "The partners in the law firm shared profits equally.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.1 The Contractor is an independent contractor and not an employee, agent, or partner of the Company.",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "applicable taxes": {
+    "legal": "Taxes that are relevant to a particular situation or circumstance.",
+    "layman": "The taxes you need to pay based on your specific situation.",
+    "example": "The company had to pay applicable taxes on its profits.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.2 The Contractor is solely responsible for: Payment of all applicable taxes, including income tax and GST",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "gst": {
+    "legal": "Goods and Services Tax, a type of consumption tax in Australia.",
+    "layman": "A type of sales tax in Australia that applies to goods and services.",
+    "example": "The company had to pay GST on its online purchases.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.2 The Contractor is solely responsible for: Payment of all applicable taxes, including income tax and GST",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "professional licences": {
+    "legal": "Licenses required for a person to practice a specific profession or trade.",
+    "layman": "The licenses you need to get to do your job properly.",
+    "example": "The doctor needed to renew her medical license every year.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.2 The Contractor is solely responsible for: Obtaining any professional licences required for the Services",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "liability insurance": {
+    "legal": "Insurance that covers a person's liability in case of injury or damage caused by their actions.",
+    "layman": "A type of insurance that protects you if you're responsible for something going wrong.",
+    "example": "The company had to buy liability insurance to protect itself from lawsuits.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.2 The Contractor is solely responsible for: Providing own liability insurance",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "services": {
+    "legal": "The work or tasks that a contractor agrees to perform under a contract.",
+    "layman": "The work you do as part of your job.",
+    "example": "The contractor provided services to the company for six months.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "2.2 The Contractor is solely responsible for: Obtaining any professional licences required for the Services",
+        "chunk_index": 2
+      }
+    ]
+  },
+  "intellectual property": {
+    "legal": "A legal concept that encompasses creations of the mind, such as inventions, literary and artistic works, and symbols, designs, or names used in commerce.",
+    "layman": "Rights to a creative work, like a book or a song.",
+    "example": "The author owns the intellectual property rights to her novel.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4. INTELLECTUAL PROPERTY",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "work product": {
+    "legal": "A product or output resulting from the application of skills, effort, and expertise, such as a design, document, or software program.",
+    "layman": "Something created by someone with expertise, like a report or a website.",
+    "example": "The company's marketing team produced a work product for their new campaign.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4.1 All design work, assets, concepts, and deliverables created specifically for the Company or its clients under this Agreement (",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "contractor ip": {
+    "legal": "Intellectual property rights owned by an independent contractor, such as patents, trademarks, copyrights, or trade secrets.",
+    "layman": "The intellectual property rights of a freelancer or consultant.",
+    "example": "The contractor retains ownership of her IP for the work she does on this project.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4.2 The Contractor retains ownership of pre-existing tools, templates, design systems, and personal libraries (",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "prior written consent": {
+    "legal": "A formal request or permission from someone to do something, often required by law or contract.",
+    "layman": "Getting permission from someone before doing something, usually in writing.",
+    "example": "The company needs prior written consent from the client before sharing their work online.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4.3 The Contractor may showcase Work Product in a personal portfolio with prior written consent from the Company,",
+        "chunk_index": 4
+      }
+    ]
+  },
+  "restricted": {
+    "legal": "Limited or prohibited by law, contract, or agreement, often requiring special permission or authorization.",
+    "layman": "Something that is not allowed or limited, usually due to rules or regulations.",
+    "example": "The company's work is restricted from being shared on social media without permission.",
+    "sources": [
+      {
+        "file": "contractor_agreement.docx",
+        "chunk": "4.3 The Contractor may showcase Work Product in a personal portfolio with prior written consent from the Company,",
+        "chunk_index": 4
+      }
+    ]
+  }
+}

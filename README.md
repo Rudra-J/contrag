@@ -101,14 +101,16 @@ Retrieval latency and chunk counts are logged to the backend console on each cha
 
 ## Evaluation
 
-Evaluated on 36 synthetically generated questions across 2 contracts (12 chunks). Ground truth generated via `llama3.2`; groundedness judged by `llama3.2` as an LLM-as-judge.
+Evaluated on **117 synthetically generated questions** across **7 contracts** (39 chunks): two demo service agreements plus an NDA, employment agreement, commercial lease, software license, and independent contractor agreement. Ground truth generated via `llama3.2`; groundedness judged by `llama3.2` as an LLM-as-judge.
 
 | Metric | Score |
 |--------|-------|
-| Hit Rate@5 | 0.833 |
-| MRR | 0.708 |
-| Mean Rank (when found) | 1.7 |
-| Groundedness | 0.778 |
+| Hit Rate@5 | 0.846 |
+| MRR | 0.711 |
+| Mean Rank (when found) | 1.6 |
+| Groundedness | 0.923 |
+
+**Groundedness note:** The judge prompt distinguishes between accurate paraphrasing (grounded) and genuinely invented facts (not grounded). The 9 remaining failures are mostly chunk-boundary truncations where the model fills in a cut-off list item from training knowledge.
 
 Run the eval pipeline yourself:
 

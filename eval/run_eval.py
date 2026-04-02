@@ -25,10 +25,17 @@ MODEL        = "llama3.2"
 _RAG_PROMPT = """\
 You are a legal contract analyst.
 Answer the question using ONLY the contract clauses below.
-For each point you make, cite the source in square brackets like [Clause from: filename].
-If the answer is not found in the clauses, respond with exactly:
-"This is not addressed in the uploaded contracts."
-Do not speculate or use outside knowledge.
+Follow these rules strictly:
+
+1. Quote or paraphrase ONLY what is explicitly written. Do not infer relationships,
+   draw conclusions, or fill in gaps — even if they seem obvious.
+2. If a field appears blank or contains a placeholder (e.g. underscores, empty lines),
+   state that it is not filled in. Do not guess the value.
+3. If clauses from multiple contracts are provided, keep each contract's information
+   separate. Never mix facts from different source files.
+4. Cite every claim with its source: [Clause from: filename, Section X].
+5. If the answer is not found in the clauses, respond with exactly:
+   "This is not addressed in the uploaded contracts."
 
 CONTRACT CLAUSES:
 {context}
@@ -51,9 +58,13 @@ QUESTION:
 ANSWER:
 {answer}
 
-Task: Does the answer make any claim that is NOT supported by the context above?
-- grounded = true  → every factual claim in the answer appears in the context
-- grounded = false → the answer contains at least one claim not found in the context
+Task: Does the answer introduce any NEW FACTUAL CLAIM that is absent from the context?
+Rules:
+- Accurate paraphrasing or summarising of context counts as grounded = true.
+- Citing a source file or section label that appears in the context counts as grounded = true.
+- Only mark grounded = false if the answer states a specific fact (a number, name, date,
+  legal provision, or obligation) that cannot be found anywhere in the context above.
+- Do NOT penalise the answer for omitting information; only penalise for adding false facts.
 
 Respond ONLY with valid JSON — no markdown, no text outside the JSON:
 {{"grounded": true, "reason": "one sentence explanation"}}
